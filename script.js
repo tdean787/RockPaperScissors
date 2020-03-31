@@ -6,46 +6,88 @@ function computerPlay(){
     return gameOptions[Math.floor(Math.random() * gameOptions.length)];
 }
 
-function playRound() {
-    // your code here!
-    const playerSelection = prompt("rock, paper, or scissors?")
-    const computerSelection = computerPlay()
-    if (playerSelection.toLowerCase() == computerSelection){
-        return "Tie!"
-    } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper'){
-        return "You lose!"
-    } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors'){
-        return "You won!"
-    } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors'){
-        return "You lose!"
-    } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock'){
-        return "You won!"
-    } else if (playerSelection.toLowerCase() ==  'scissors' && computerSelection == 'rock'){
-        return "You lose!"
-    } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper'){
-        return "You won!"
+// function playRound() {
+//     // your code here!
+//     let playerSelection = prompt("rock, paper, or scissors?")
+//     let computerSelection = computerPlay()
+//     if (playerSelection.toLowerCase() == computerSelection){
+//         return "Tie!"
+//     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper'){
+//         return "You lose!"
+//     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors'){
+//         return "You won!"
+//     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors'){
+//         return "You lose!"
+//     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock'){
+//         return "You won!"
+//     } else if (playerSelection.toLowerCase() ==  'scissors' && computerSelection == 'rock'){
+//         return "You lose!"
+//     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper'){
+//         return "You won!"
+//     }
+// }
+
+var computerScoreCount = 0
+var playerScoreCount = 0
+var tieScoreCount = 0
+
+const rock = document.querySelector('#rock')
+const paper = document.querySelector('#paper')
+const scissors = document.querySelector("#scissors")
+const resetButton = document.querySelector('#reset')
+
+const resultsBox = document.querySelector('#resultsBox')
+const computerScore = document.querySelector('#computerScore')
+const playerScore = document.querySelector("#playerScore")
+const tieCount = document.querySelector("#tieCount")
+
+rock.addEventListener('click', function(){
+    let computerSelection = computerPlay();
+    if (computerSelection == 'rock'){
+        increaseTieCount();
+    } else if (computerSelection == 'paper'){
+        increaseComputerScore();
+    } else {
+        increasePlayerScore();
     }
+});
+
+paper.addEventListener('click', function(){
+    let computerSelection = computerPlay();
+    if (computerSelection == 'paper'){
+        increaseTieCount();
+    } else if (computerSelection == 'scissors'){
+        increaseComputerScore();
+    } else {
+        increasePlayerScore();
+    }
+});
+
+scissors.addEventListener('click', function(){
+    let computerSelection = computerPlay();
+    if (computerSelection == 'scissors'){
+        increaseTieCount();
+    } else if (computerSelection == 'rock'){
+        increaseComputerScore();
+    } else {
+        increasePlayerScore();
+    }
+});
+
+resetButton.addEventListener('click', function(){
+    tieCount.textContent = 0;
+    computerScore.textContent = 0;
+    playerScore.textContent = 0;
+})
+
+function increaseTieCount() {
+    tieCount.textContent = tieScoreCount += 1;
 }
 
-function game() {
-    let computerScore = 0
-    let playerScore = 0
-    let tieCount = 0
-    for (let i = 0; i < 5; i++){
-        let roundResult = playRound();
-        if(roundResult == 'You lose!'){
-            computerScore += 1
-            console.log("you lost this round")
-        } else if (roundResult == 'You won!'){
-            playerScore += 1
-            console.log('you won')
-        }
-         else if (roundResult == "Tie!"){
-            tieCount += 1
-            console.log('tie')
-        } 
-    }
-    return{"computer wins":computerScore,"player wins":playerScore,"number of ties":tieCount}
+function increaseComputerScore() {
+    computerScore.textContent = computerScoreCount += 1;
 }
 
-// console.log(playRound(playerSelection, computerSelection))
+function increasePlayerScore() {
+    playerScore.textContent = playerScoreCount += 1;
+}
