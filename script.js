@@ -1,31 +1,8 @@
 const gameOptions = ['rock','paper','scissors']
-// const playerSelection = 'rock'
-// const computerSelection = computerPlay()
 
 function computerPlay(){
     return gameOptions[Math.floor(Math.random() * gameOptions.length)];
 }
-
-// function playRound() {
-//     // your code here!
-//     let playerSelection = prompt("rock, paper, or scissors?")
-//     let computerSelection = computerPlay()
-//     if (playerSelection.toLowerCase() == computerSelection){
-//         return "Tie!"
-//     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper'){
-//         return "You lose!"
-//     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors'){
-//         return "You won!"
-//     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors'){
-//         return "You lose!"
-//     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock'){
-//         return "You won!"
-//     } else if (playerSelection.toLowerCase() ==  'scissors' && computerSelection == 'rock'){
-//         return "You lose!"
-//     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper'){
-//         return "You won!"
-//     }
-// }
 
 var computerScoreCount = 0
 var playerScoreCount = 0
@@ -41,37 +18,53 @@ const computerScore = document.querySelector('#computerScore')
 const playerScore = document.querySelector("#playerScore")
 const tieCount = document.querySelector("#tieCount")
 
+let playerPick = document.querySelector("#playerPick")
+let computerPick = document.querySelector("#computerPick")
+
+
 rock.addEventListener('click', function(){
     let computerSelection = computerPlay();
     if (computerSelection == 'rock'){
+        computerPick.textContent = "Rock"
         increaseTieCount();
     } else if (computerSelection == 'paper'){
         increaseComputerScore();
+        computerPick.textContent = "Paper"
     } else {
         increasePlayerScore();
+        computerPick.textContent = "Scissors"
     }
+    playerPick.textContent = "Rock"
 });
 
 paper.addEventListener('click', function(){
     let computerSelection = computerPlay();
     if (computerSelection == 'paper'){
         increaseTieCount();
+        computerPick.textContent = "Paper"
     } else if (computerSelection == 'scissors'){
         increaseComputerScore();
+        computerPick.textContent = "Scissors"
     } else {
         increasePlayerScore();
+        computerPick.textContent = "Rock"
     }
+    playerPick.textContent = "Paper"
 });
 
 scissors.addEventListener('click', function(){
     let computerSelection = computerPlay();
     if (computerSelection == 'scissors'){
         increaseTieCount();
+        computerPick.textContent = "Scissors"
     } else if (computerSelection == 'rock'){
         increaseComputerScore();
+        computerPick.textContent = "Rock"
     } else {
         increasePlayerScore();
+        computerPick.textContent = "Paper"
     }
+    playerPick.textContent = "Scissors"
 });
 
 resetButton.addEventListener('click', function(){
@@ -81,6 +74,8 @@ resetButton.addEventListener('click', function(){
     tieCount.textContent = 0;
     computerScore.textContent = 0;
     playerScore.textContent = 0;
+    playerPick.textContent = "";
+    computerPick.textContent = "";
 })
 
 function increaseTieCount() {
