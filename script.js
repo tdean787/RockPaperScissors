@@ -75,6 +75,9 @@ scissors.addEventListener('click', function(){
 });
 
 resetButton.addEventListener('click', function(){
+    tieScoreCount = 0
+    computerScoreCount = 0;
+    playerScoreCount = 0;
     tieCount.textContent = 0;
     computerScore.textContent = 0;
     playerScore.textContent = 0;
